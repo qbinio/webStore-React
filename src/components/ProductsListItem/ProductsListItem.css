@@ -1,0 +1,23 @@
+.productListItemWrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 400px;
+}
+
+.div1 {
+  position: relative;
+}
+.productListItemImage {
+  height: 300px;
+  width: 300px;
+  position: absolute;
+  top: 50%;
+  right: 10%;
+  transform: translate(-10%, -50%);
+}
+.div2 {
+}
+.productListItemName {
+  height: 20%;
+  text-align: center;
+}
