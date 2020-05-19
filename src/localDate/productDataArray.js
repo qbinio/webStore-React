@@ -6,6 +6,7 @@ import productImage5 from "../assets/images/Suavecito.png";
 import productImage6 from "../assets/images/Uppercut.jpg";
 import productImage7 from "../assets/images/Schmiere.jpg";
 import productImage8 from "../assets/images/SlickGorilla.jpg";
+import productImage9 from "../assets/images/PercyNobleman.jpeg";
 
 export const productDataArray = [
   {
@@ -72,7 +73,7 @@ export const productDataArray = [
       "Pomada do włosów marki Schmiere. Pomada na bazie wazeliny o mocnym chwycie i słodkim zapachu gumy do żucia. Schmiere Pomade strong posiada kremową konsystencję, dzięki czemu bardzo łatwo rozgrzewa się w dłoniach i nakłada na włosy. Produkt doskonale sprawdza się w modelowaniu tak normalnych, jak i grubych włosów. Dzięki oryginalnej, niemieckiej recepturze produkt nie zastyga we włosach, sprawiając że bardzo łatwo się je rozczesuje w ciągu dnia. Od teraz wasze pióra będą zawsze wprawiały innych w zdumienie.",
   },
   {
-    productName: "SlickGorilla",
+    productName: "Slick Gorilla",
     productImage: productImage8,
     productPrice: 20,
     productWeight: "70g",
@@ -80,4 +81,25 @@ export const productDataArray = [
     productDescription:
       "Matowa pasta do stylizacji włosów marki Slick Gorilla. Pasta do układania włosów, o wodnej bazie, lekkim/średnim chwycie i matowym finishu. Odpowiednio rozgrzana i nałożona, zapewnia sprężystość i naturalne wykończenie, idealna do fryzur typu messy. Nadaje się do wszelkiego rodzaju włosów. Dodatkowym atutem pomad od Slick Gorilla są naturalne, etycznie pozyskane składniki. Produkt nietestowany na zwierzętach, wegański.",
   },
+  {
+    productName: "Percy Nobleman",
+    productImage: productImage9,
+    productPrice: 25,
+    productWeight: "100ml",
+    productQuantity: 1,
+    productDescription:
+      "Pomada do stylizacji włosów o bardzo mocnym chwycie i matowym efekcie. Matt Clay bazuje na porcelanowej glince, wazelinie i wosku pszczelim, które odpowiadają za wymodelowanie każdej wymagającej fryzury. Zawarty w pomadzie olejek z migdałów dba o elastyczność włosów a jej zapach to bardzo świeże nuty cytrusowe. Pasta składa się w 100% z naturalnych składników bez dodatków chemii, dzięki czemu włosy oraz skóra pozostaję w bardzo dobrej kondycji. Mimo swojej mocy, całkiem szybko rozgrzewa się w dłoniach i łatwo się aplikuje.",
+  },
 ];
+
+export const productsPrice = {
+  american: 20,
+  layrite: 30,
+  pomp: 35,
+  reuzel: 10,
+  suavecito: 30,
+  upper: 25,
+  schmiere: 25,
+  gorilla: 20,
+  percy: 25,
+};

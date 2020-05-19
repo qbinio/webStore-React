@@ -1,2 +1,30 @@
+.productList_wrapper {
+  margin: 30px 0px;
+}
 .productList {
+  display: grid;
+  grid-template-columns: repeat(3, 400px);
+  width: 80%;
+  margin: 0 auto;
+  list-style: none;
+  grid-column-gap: 30px;
+}
+.productList_buttonWrapper {
+  display: flex;
+  align-items: center;
+}
+.productList_backIcon {
+  width: 30px;
+  height: 30px;
+  margin: 0px 5px;
+}
+.productList_returnButton {
+  display: flex;
+  text-decoration: none;
+  border: none;
+  background-color: white;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+  align-items: center;
 }

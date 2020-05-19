@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { routes } from "../../routes";
 import "./NavBar.css";
+import cartIcon from "../../assets/icons/shopping-bags.svg";
+import AppContext from "../../context/context";
 
 const NavBar = () => {
+  const context = useContext(AppContext);
+  const { handleCartOpen, cartCounter, resetSearchInputProducts } = context;
   return (
     <div className="navBarWrapper">
       <ul className="navBar">
@@ -13,7 +17,11 @@ const NavBar = () => {
           </Link>
         </li>
         <li>
-          <Link className="navBarElement" to={routes.products}>
+          <Link
+            className="navBarElement"
+            to={routes.products}
+            onClick={resetSearchInputProducts}
+          >
             Products
           </Link>
         </li>
@@ -26,6 +34,12 @@ const NavBar = () => {
           <Link className="navBarElement" to={routes.contact}>
             Contact
           </Link>
+        </li>
+        <li>
+          <button className="cartButton" onClick={handleCartOpen}>
+            <img src={cartIcon} alt="cart icon" className="cartIcon" />
+            <span className="cartCounter">{cartCounter}</span>
+          </button>
         </li>
       </ul>
     </div>

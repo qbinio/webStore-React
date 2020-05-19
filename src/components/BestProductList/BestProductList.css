@@ -1,0 +1,33 @@
+.bestProductList_wrapper {
+  margin-top: 100px;
+  border-top: 1px solid grey;
+}
+.bestProductList_title {
+  text-align: center;
+  padding: 70px 0px;
+  font-size: 50px;
+}
+.bestProductList {
+  display: grid;
+  grid-template-columns: repeat(4, 300px);
+  width: 80%;
+  margin: 0 auto;
+  list-style: none;
+  grid-column-gap: 30px;
+}
+.bestProductList_linkWrapper {
+  margin: 30px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.bestProductList_link {
+  text-decoration: none;
+  font-size: 24px;
+  color: white;
+  background-color: red;
+  padding: 5px 15px;
+  border: 3px solid red;
+  border-radius: 50px;
+  font-weight: bold;
+}

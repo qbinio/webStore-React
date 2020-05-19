@@ -1,0 +1,25 @@
+.contactFormWrapper {
+  margin-top: 50px;
+}
+.contactForm {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  margin: auto;
+}
+.contactFormInput {
+  padding: 10px;
+  color: grey;
+  margin-bottom: 20px;
+}
+.contactButton {
+  margin-top: 20px;
+  display: flex;
+}
+.contactFormButton {
+  padding: 8px 20px 8px 20px;
+  font-weight: bold;
+  background-color: lightseagreen;
+  color: white;
+  cursor: pointer;
+}

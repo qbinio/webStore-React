@@ -1,0 +1,83 @@
+.about_firstSectionWrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.about_firstSectionHalf {
+  height: 90vh;
+}
+.about_firstSectionText {
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+.about_firstSectionTitle {
+  height: 20%;
+  padding: 0px 30px;
+}
+.about_firstSectionDesc {
+  padding: 0px 60px 0px 30px;
+}
+.dwa {
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+.zdj {
+  height: 100%;
+  width: 100%;
+}
+.trzy {
+  height: 50%;
+}
+.cztery {
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+.about_secondSectionwrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.about_secondSectionHalf {
+  height: 90vh;
+}
+.about_secondSectionUpHalf {
+  display: flex;
+  height: 50%;
+  width: 100%;
+  justify-content: center;
+  align-items: flex-end;
+}
+.about_secondSectionDownHalf {
+  display: flex;
+  height: 50%;
+  width: 100%;
+  justify-content: center;
+  align-items: flex-start;
+}
+.about_secondSectionImage {
+  width: 270px;
+  height: 270px;
+}
+.about_secconSectionTextWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.about_secondSectionTitle {
+  position: absolute;
+  top: 150px;
+}
+.about_secondSectionDesc {
+  position: absolute;
+  top: 250px;
+  width: 90%;
+  line-height: 1.6;
+}
