@@ -6,12 +6,7 @@ import { routes } from "../../routes";
 
 const ProductListItem = (props) => {
   const context = useContext(AppContext);
-  const {
-    handleAddCartCounter,
-    addProductToCart,
-    increaseProductQuantity,
-    addProductQuantity,
-  } = context;
+  const { handleAddCartCounter, addProductToCart } = context;
   return (
     <div className="productListItemWrapper">
       <div className="productImageBox">
@@ -59,7 +54,6 @@ const ProductListItem = (props) => {
           onClick={() => {
             handleAddCartCounter();
             addProductToCart(props.name);
-            // increaseProductQuantity(props.name);
           }}
         >
           Add to cart

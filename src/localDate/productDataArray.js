@@ -91,15 +91,3 @@ export const productDataArray = [
       "Pomada do stylizacji włosów o bardzo mocnym chwycie i matowym efekcie. Matt Clay bazuje na porcelanowej glince, wazelinie i wosku pszczelim, które odpowiadają za wymodelowanie każdej wymagającej fryzury. Zawarty w pomadzie olejek z migdałów dba o elastyczność włosów a jej zapach to bardzo świeże nuty cytrusowe. Pasta składa się w 100% z naturalnych składników bez dodatków chemii, dzięki czemu włosy oraz skóra pozostaję w bardzo dobrej kondycji. Mimo swojej mocy, całkiem szybko rozgrzewa się w dłoniach i łatwo się aplikuje.",
   },
 ];
-
-export const productsPrice = {
-  american: 20,
-  layrite: 30,
-  pomp: 35,
-  reuzel: 10,
-  suavecito: 30,
-  upper: 25,
-  schmiere: 25,
-  gorilla: 20,
-  percy: 25,
-};

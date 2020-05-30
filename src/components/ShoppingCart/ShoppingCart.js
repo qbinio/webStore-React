@@ -5,7 +5,6 @@ import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import AppContext from "../../context/context";
 import "./ShoppingCart.css";
-import { Hidden } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -33,11 +32,10 @@ const ShoppingCart = () => {
     isCartOpen,
     handleCartClose,
     shoppingCart,
-    addProductQuantity,
-    productQuantityCount,
-    deleteProductFromCart,
     deleteFn,
     cartTotal,
+    deleteProductQuantity,
+    addProductQuantity,
   } = context;
 
   return (
@@ -54,7 +52,7 @@ const ShoppingCart = () => {
           timeout: 500,
         }}
       >
-        <Fade in={isCartOpen}>
+        <Fade style={{ overflowY: "scroll" }} in={isCartOpen}>
           <div className={classes.paper}>
             <div className="shoppingCart_totalWrapper">
               <h2 style={{ textAlign: "center" }}>Your Shopping Cart</h2>
@@ -82,14 +80,19 @@ const ShoppingCart = () => {
                       </div>
                       <p className="shoppingCart__name">{item.productName}</p>
                       <div className="shoppingCart__quntityWrapper">
-                        <button className="shoppingCart_buttonMinus">-</button>
+                        <button
+                          onClick={() =>
+                            deleteProductQuantity(item.productName)
+                          }
+                          className="shoppingCart_buttonMinus"
+                        >
+                          -
+                        </button>
                         <p className="shoppingCart__quantity">
                           {item.productQuantity}
                         </p>
                         <button
-                          onClick={() => {
-                            addProductQuantity(item.productName);
-                          }}
+                          onClick={() => addProductQuantity(item.productName)}
                           className="shopingCart_buttonPlus"
                         >
                           {" "}

@@ -4,11 +4,7 @@ import AppContext from "../../context/context";
 
 const BestProductListItem = (props) => {
   const context = useContext(AppContext);
-  const {
-    handleAddCartCounter,
-    addProductToCart,
-    increaseProductQuantity,
-  } = context;
+  const { handleAddCartCounter, addProductToCart } = context;
 
   return (
     <div className="bestProductListItem_wrapper">
@@ -43,7 +39,6 @@ const BestProductListItem = (props) => {
           onClick={() => {
             handleAddCartCounter();
             addProductToCart(props.name);
-            increaseProductQuantity(props.name);
           }}
         >
           Add to cart

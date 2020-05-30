@@ -9,6 +9,7 @@ import SingleProduct from "./views/SingleProduct/SingleProduct";
 import Contact from "./views/Contact/Contact";
 import AppContext from "./context/context";
 import { productDataArray } from "./localDate/productDataArray";
+import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 
 const Root = () => {
   const initalProductsState = [...productDataArray];
@@ -34,6 +35,32 @@ const Root = () => {
     setCartCounter(cartCounter + 1);
   };
 
+  const addProductQuantity = (type) => {
+    console.log(shoppingCart.productQuantity);
+    shoppingCart.forEach((item) => {
+      if (item.productName === type) {
+        item.productQuantity = item.productQuantity + 1;
+        calculateTotals(type);
+      }
+      console.log(item.productQuantity);
+    });
+    setCartCounter(cartCounter + 1);
+  };
+
+  const deleteProductQuantity = (type) => {
+    shoppingCart.forEach((item) => {
+      if (item.productName === type) {
+        if (item.productQuantity > 1)
+          item.productQuantity = item.productQuantity - 1;
+        else {
+          deleteFn(type);
+        }
+      }
+      calculateTotals(type);
+    });
+    setCartCounter(cartCounter - 1);
+  };
+
   const addProductToCart = (productName) => {
     const filteredProduct = products.filter(
       (product) => product.productName === productName
@@ -56,76 +83,26 @@ const Root = () => {
     console.log(deletedProduct);
 
     setCartCounter(cartCounter - deletedProduct.productQuantity);
-
+    deletedProduct.productQuantity = 1;
     setShoppingCart([...new Set([...filteredProducts])]);
   };
 
   const addProductQuantityAndPrice = (type) => {
-    console.log(shoppingCart);
-    let initialProductPrice = 0;
-
-    productDataArray.forEach((product) => {
-      if (product.productName === type) {
-        console.log(product.productPrice);
-        initialProductPrice = product.productPrice;
-      }
-    });
-    console.log(initialProductPrice);
-
     shoppingCart.forEach((item) => {
       if (item.productName === type) {
         console.log("TAK");
         item.productQuantity = item.productQuantity + 1;
-        item.productPrice = initialProductPrice * item.productQuantity;
-        console.log(item.productPrice);
       } else {
         console.log("NIe");
       }
-      item.productPrice = initialProductPrice;
-      console.log(initialProductPrice);
     });
   };
-
-  // const increaseProductQuantity = (type) => {
-  //   const copyOfShoppingCart = [...shoppingCart];
-  //   console.log(copyOfShoppingCart);
-
-  //   copyOfShoppingCart.forEach((item) => {
-  //     if (item.productName === type) {
-  //       item.productQuantity = item.productQuantity + 1;
-  //       item.productPrice = item.productPrice + 30;
-  //       console.log(item.productName);
-  //       console.log(type);
-  //       console.log(copyOfShoppingCart);
-  //     } else {
-  //       console.log("ERROR");
-  //       console.log(copyOfShoppingCart);
-  //     }
-
-  //     setShoppingCart([...copyOfShoppingCart]);
-  //   });
-
-  // let selectedProduct = shoppingCart.find(
-  //   (item) => item.productName === type
-  // );
-
-  // console.log(selectedProduct);
-
-  // let selectedProductQuantity = selectedProduct.productQuantity;
-  // let selectedProductPrice = selectedProduct.productPrice;
-  // const firstProductPrice = selectedProduct.productPrice;
-  // console.log(firstProductPrice);
-
-  // selectedProduct.productQuantity = selectedProductQuantity + 1;
-  // selectedProduct.productPrice = selectedProductPrice + firstProductPrice;
-  // selectedProduct.productPrice = console.log(selectedProductQuantity);
-  // };
 
   const calculateTotals = () => {
     let total = 0;
 
     shoppingCart.forEach((item) => {
-      total = total + item.productPrice;
+      total = total + item.productPrice * item.productQuantity;
     });
 
     setCartTotal(total);
@@ -170,13 +147,13 @@ const Root = () => {
     setErrorSearchInput("");
   };
 
-  useEffect(() => {
-    calculateTotals();
-  }, [shoppingCart]);
-
-  // useEffect(() => {
-  //   window.scrollTo(0, 0);
-  // }, [routes.products]);
+  useEffect(
+    () => {
+      calculateTotals();
+    },
+    [shoppingCart],
+    addProductQuantity
+  );
 
   return (
     <BrowserRouter>
@@ -198,12 +175,14 @@ const Root = () => {
           searchProductFn,
           searchProducts,
           resetSearchInputProducts,
-          // increaseProductQuantity,
           errorSearchInput,
           clearErrorAlerts,
+          addProductQuantity,
+          deleteProductQuantity,
         }}
       >
         <MainTemplate>
+          <ScrollToTop />
           <Switch>
             <Route exact path={routes.home} component={Home} />
             <Route path={routes.about} component={About} />

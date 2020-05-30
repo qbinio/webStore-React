@@ -8,7 +8,6 @@ const ContactForm = () => {
 
   const onValidate = (e) => {
     e.preventDefault();
-    // e.target.reset();
 
     const emailInputValue = e.target.email.value;
 
@@ -22,19 +21,10 @@ const ContactForm = () => {
 
     if (phoneNumberInputValue.substring(0, 3) !== "+48")
       setPhoneNumberErrorAlert("Wprowadź numer kierunkowy +48");
-    // if (phoneNumberInputValue.length > 10);
-    // setPhoneNumberErrorAlert("Wprowadziłeś zbyt długi numer");
     else {
       setSuccessAlert("Wysłano");
       setPhoneNumberErrorAlert("");
     }
-
-    // if (!phoneNumberInputValue.includes())
-    //   setPhoneNumberErrorAlert("Wprowadziłeś zbyt długi numer");
-    // else {
-    //   setSuccessAlert("Wysłano");
-    //   setPhoneNumberErrorAlert("");
-    // }
   };
 
   return (
@@ -96,7 +86,3 @@ const ContactForm = () => {
 };
 
 export default ContactForm;
-
-//Email regex
-// const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-// return re.test(String(email).toLowerCase());

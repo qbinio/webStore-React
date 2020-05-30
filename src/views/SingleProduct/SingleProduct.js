@@ -32,11 +32,6 @@ const SingleProduct = (props) => {
           </button>
 
           <div className="singleProduct_addToCartWrapper">
-            <button className="singleProduct_quantityButton">-</button>
-            <h4 className="singleProduct_quantity">
-              {props.location.state.productQuantity}
-            </h4>
-            <button className="singleProduct_quantityButton">+</button>
             <button
               className="singleProduct_addToCartButton"
               onClick={() => {
