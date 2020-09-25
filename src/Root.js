@@ -18,7 +18,6 @@ const Root = () => {
   const [cartCounter, setCartCounter] = useState(0);
   const [products, setProducts] = useState([...initalProductsState]);
   const [shoppingCart, setShoppingCart] = useState([...new Set([])]);
-  const [productQuantityCount, setProductQuantityCount] = useState(1);
   const [cartTotal, setCartTotal] = useState(0);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [searchProducts, setSearchProducts] = useState([]);
@@ -168,7 +167,6 @@ const Root = () => {
           products,
           deleteFn,
           addProductToCart,
-          productQuantityCount,
           addProductQuantityAndPrice,
           cartTotal,
           filteredProducts,

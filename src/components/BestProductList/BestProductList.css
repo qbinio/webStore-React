@@ -31,3 +31,27 @@
   border-radius: 50px;
   font-weight: bold;
 }
+
+/* media queries */
+
+@media screen and (max-width: 1024px) {
+  .bestProductList {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 80%;
+    margin: 0 auto;
+    list-style: none;
+    grid-column-gap: 30px;
+  }
+}
+
+@media screen and (max-width: 728px) {
+  .bestProductList {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 80%;
+    margin: 0 auto;
+    list-style: none;
+    grid-column-gap: 30px;
+  }
+}

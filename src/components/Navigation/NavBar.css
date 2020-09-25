@@ -45,4 +45,15 @@
   left: 50%;
   transform: translate(-60%, -50%);
   color: black;
+
+
+  
+}
+
+/* media queries */
+
+@media only screen and (max-width: 400px) {
+  .navBarElement {
+    padding: 0px 10px 0px 0px;
+  }
 }

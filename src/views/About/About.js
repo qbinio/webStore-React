@@ -43,9 +43,9 @@ const About = () => (
         </div>
       </div>
     </div>
-    <div className="about_secondSectionwrapper">
+    <div className="about_secondSectionWrapper">
       <div className="about_secondSectionHalf">
-        <div className="about_secconSectionTextWrapper">
+        <div className="about_secondSectionTextWrapper">
           <h1 className="about_secondSectionTitle">HIGHEST QUALITY PRODUCTS</h1>
           <p className="about_secondSectionDesc">
             {" "}

@@ -9,6 +9,7 @@
   list-style: none;
   grid-column-gap: 30px;
 }
+
 .productList_buttonWrapper {
   display: flex;
   align-items: center;
@@ -27,4 +28,20 @@
   font-weight: bold;
   cursor: pointer;
   align-items: center;
+}
+
+/* media queries */
+
+@media only screen and (max-width: 1024px) {
+  .productList {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media only screen and (max-width: 720px) {
+  .productList {
+    display: flex;
+    flex-direction: column;
+  }
 }

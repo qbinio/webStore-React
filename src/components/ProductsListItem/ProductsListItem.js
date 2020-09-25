@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import "./ProductsListItem.css";
 import AppContext from "../../context/context";
 import { Link } from "react-router-dom";
-import { routes } from "../../routes";
 
 const ProductListItem = (props) => {
   const context = useContext(AppContext);
