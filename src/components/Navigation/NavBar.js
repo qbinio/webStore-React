@@ -1,47 +1,68 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { routes } from "../../routes";
 import "./NavBar.css";
 import cartIcon from "../../assets/icons/shopping-bags.svg";
 import AppContext from "../../context/context";
+import NavMobile from "./NavMobile/NavMobile";
 
 const NavBar = () => {
   const context = useContext(AppContext);
-  const { handleCartOpen, cartCounter, resetSearchInputProducts } = context;
+  const {
+    handleCartOpen,
+    cartCounter,
+    resetSearchInputProducts,
+    widthPage,
+    showBurgerMenu,
+    toggleBurgerMenu,
+  } = context;
+
   return (
     <div className="navBarWrapper">
-      <ul className="navBar">
-        <li>
-          <Link className="navBarElement" to={routes.home}>
-            Home
-          </Link>
-        </li>
-        <li>
-          <Link
-            className="navBarElement"
-            to={routes.products}
-            onClick={resetSearchInputProducts}
-          >
-            Products
-          </Link>
-        </li>
-        <li>
-          <Link className="navBarElement" to={routes.about}>
-            About
-          </Link>
-        </li>
-        <li>
-          <Link className="navBarElement" to={routes.contact}>
-            Contact
-          </Link>
-        </li>
-        <li>
-          <button className="cartButton" onClick={handleCartOpen}>
-            <img src={cartIcon} alt="cart icon" className="cartIcon" />
-            <span className="cartCounter">{cartCounter}</span>
-          </button>
-        </li>
-      </ul>
+      <NavLink className="logo" exact to={routes.home}>
+        {" "}
+        Jakub Korzeń
+      </NavLink>
+
+      {widthPage > 780 ? (
+        <ul className="navBar">
+          <li>
+            <NavLink
+              className="navBarElement"
+              activeClassName="activeNavBarElement"
+              to={routes.products}
+              onClick={resetSearchInputProducts}
+            >
+              Products
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              className="navBarElement"
+              activeClassName="activeNavBarElement"
+              to={routes.about}
+            >
+              About
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              className="navBarElement"
+              activeClassName="activeNavBarElement"
+              to={routes.contact}
+            >
+              Contact
+            </NavLink>
+          </li>
+        </ul>
+      ) : (
+        <NavMobile />
+      )}
+
+      <button className="cartButton" onClick={handleCartOpen}>
+        <img src={cartIcon} alt="cart icon" className="cartIcon" />
+        <span className="cartCounter">{cartCounter}</span>
+      </button>
     </div>
   );
 };

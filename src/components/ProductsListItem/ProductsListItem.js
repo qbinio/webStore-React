@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import "./ProductsListItem.css";
 import AppContext from "../../context/context";
 import { Link } from "react-router-dom";
+import Tada from "react-reveal/Tada";
 
 const ProductListItem = (props) => {
   const context = useContext(AppContext);

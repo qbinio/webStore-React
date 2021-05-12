@@ -26,11 +26,9 @@ const SingleProduct = (props) => {
           <p className="singleProduct_desc">
             {props.location.state.productDescription}
           </p>
-
           <button className="singleProduct_weight">
             {props.location.state.productWeight}
           </button>
-
           <div className="singleProduct_addToCartWrapper">
             <button
               className="singleProduct_addToCartButton"

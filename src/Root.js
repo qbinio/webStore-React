@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { routes } from "./routes";
 import MainTemplate from "./templates/MainTemplate/MainTemplate";
@@ -10,18 +10,171 @@ import Contact from "./views/Contact/Contact";
 import AppContext from "./context/context";
 import { productDataArray } from "./localDate/productDataArray";
 import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
+import { client } from "./contentful/contentfulConfig";
 
 const Root = () => {
-  const initalProductsState = [...productDataArray];
+  const [initalProductsState, setInitalProductsState] = useState([]);
+  const cartFromLocalStorage = JSON.parse(
+    localStorage.getItem("itemsInCart") || "[]"
+  );
+  const cartCounterValue = JSON.parse(localStorage.getItem("cartCounter") || 0);
 
   const [isCartOpen, setCartVisibility] = useState(false);
-  const [cartCounter, setCartCounter] = useState(0);
-  const [products, setProducts] = useState([...initalProductsState]);
-  const [shoppingCart, setShoppingCart] = useState([...new Set([])]);
+  const [cartCounter, setCartCounter] = useState(cartCounterValue);
+  const [products, setProducts] = useState([]);
+  const [shoppingCart, setShoppingCart] = useState([
+    ...new Set(cartFromLocalStorage),
+  ]);
   const [cartTotal, setCartTotal] = useState(0);
   const [filteredProducts, setFilteredProducts] = useState([]);
-  const [searchProducts, setSearchProducts] = useState([]);
   const [errorSearchInput, setErrorSearchInput] = useState("");
+  const [filterPrice, setFilterPrice] = useState(0);
+  const [maxProductPrice, setMaxProductPrice] = useState(0);
+  const [freeDelivery, setFreeDelivery] = useState(false);
+  const [categoryFilter, setCategoryFilter] = useState("all");
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertContent, setAlertContent] = useState("");
+  const [searchProductByName, setSearchProductByName] = useState("");
+  const [widthPage, setWidthPage] = useState(window.innerWidth);
+  const [showBurgerMenu, setShowBurgerMenu] = useState(false);
+
+  const toggleBurgerMenu = () => {
+    setShowBurgerMenu(!showBurgerMenu);
+  };
+
+  useEffect(() => {
+    const updateSize = () => {
+      setWidthPage(window.innerWidth);
+    };
+    window.addEventListener("resize", updateSize);
+  }, []);
+
+  const setContentfulData = (data) => {
+    const contentfulProducts = data.map((item) => {
+      const id = item.sys.id;
+
+      const formatedProductImage = item.fields.productImage.fields.file.url;
+
+      const product = {
+        id,
+        ...item.fields,
+        productImage: formatedProductImage,
+      };
+
+      console.log(product);
+
+      return product;
+    });
+    setInitalProductsState([...contentfulProducts]);
+    setProducts([...contentfulProducts]);
+  };
+
+  const getContentfulData = () => {
+    client
+      .getEntries({
+        content_type: "product",
+      })
+      .then((res) => {
+        console.log(res);
+        setContentfulData(res.items);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  useEffect(() => {
+    getContentfulData();
+  }, []);
+
+  const handleAlertOpen = () => {
+    setAlertOpen(true);
+  };
+  const handleAlertClose = () => {
+    setAlertOpen(false);
+  };
+
+  const handleSearchProductByNameChange = (e) => {
+    setSearchProductByName(e.target.value);
+  };
+
+  const handleCategoryFilterChange = (e) => {
+    setCategoryFilter(e.target.value);
+  };
+
+  const filterProducts = () => {
+    let tempProducts = [...initalProductsState];
+
+    if (searchProductByName.length > 0) {
+      tempProducts = tempProducts.filter((product) => {
+        return (
+          product.productName
+            .toLowerCase()
+            .slice(0, searchProductByName.length) ===
+          searchProductByName.toLowerCase()
+        );
+      });
+    }
+
+    if (categoryFilter !== "all") {
+      tempProducts = tempProducts.filter((product) => {
+        return product.productCategory === categoryFilter;
+      });
+    }
+
+    let tempPrice = parseInt(filterPrice);
+    tempProducts = tempProducts.filter(
+      (product) => product.productPrice <= tempPrice
+    );
+
+    if (freeDelivery) {
+      tempProducts = tempProducts.filter(
+        (product) => product.freeDelivery === true
+      );
+    }
+
+    setProducts([...tempProducts]);
+  };
+  useEffect(() => {
+    filterProducts();
+  }, [categoryFilter, filterPrice, freeDelivery, searchProductByName]);
+
+  const showAndCloseAlertAfterTimeWithContent = (time, content) => {
+    handleAlertOpen();
+    setAlertContent(content);
+    setTimeout(() => {
+      handleAlertClose();
+    }, time);
+  };
+
+  const clearAndCloseCart = () => {
+    setShoppingCart([]);
+    setCartCounter(0);
+    handleCartClose();
+    showAndCloseAlertAfterTimeWithContent(5000, "Payment succeed!");
+  };
+
+  const handleFreeDelivery = (e) => {
+    setFreeDelivery(e.target.checked);
+  };
+
+  const getMaxProductPrice = () => {
+    const productsPrices = productDataArray.map((product) => {
+      return product.productPrice;
+    });
+
+    console.log(productsPrices);
+
+    const highestPrice = Math.max(...productsPrices);
+    setMaxProductPrice(highestPrice);
+    setFilterPrice(highestPrice);
+  };
+
+  useEffect(() => {
+    getMaxProductPrice();
+  }, []);
+
+  const handleFilterPriceChange = (e) => {
+    setFilterPrice(e.target.value);
+  };
 
   const handleCartOpen = () => {
     setCartVisibility(true);
@@ -65,9 +218,22 @@ const Root = () => {
       (product) => product.productName === productName
     );
 
-    setShoppingCart([...new Set([...shoppingCart, ...filteredProduct])]);
+    let isProductAlreadyInCart;
+
+    shoppingCart.forEach((product) => {
+      if (product.productName === productName) {
+        isProductAlreadyInCart = true;
+      }
+    });
+
+    if (isProductAlreadyInCart) {
+      setShoppingCart([...new Set([...shoppingCart])]);
+    } else {
+      setShoppingCart([...new Set([...shoppingCart, ...filteredProduct])]);
+    }
 
     addProductQuantityAndPrice(productName);
+    showAndCloseAlertAfterTimeWithContent(3500, "Product added to cart!");
   };
 
   const deleteFn = (type) => {
@@ -89,10 +255,8 @@ const Root = () => {
   const addProductQuantityAndPrice = (type) => {
     shoppingCart.forEach((item) => {
       if (item.productName === type) {
-        console.log("TAK");
         item.productQuantity = item.productQuantity + 1;
       } else {
-        console.log("NIe");
       }
     });
   };
@@ -103,44 +267,15 @@ const Root = () => {
     shoppingCart.forEach((item) => {
       total = total + item.productPrice * item.productQuantity;
     });
-
     setCartTotal(total);
   };
 
-  const searchProductFn = (e) => {
-    e.preventDefault();
-    let tempProducts = [...products];
-
-    const searchInputValue = e.target.search.value;
-
-    if (searchInputValue.length > 0) {
-      tempProducts = tempProducts.filter((item) => {
-        let tempSearch = searchInputValue.toLowerCase();
-        let tempName = item.productName
-          .toLowerCase()
-          .slice(0, searchInputValue.length);
-
-        if (tempSearch === tempName) {
-          return item;
-        }
-      });
-    } else if (searchInputValue.length === 0) {
-      setErrorSearchInput("Input nie moze być pusty");
-    }
-
-    if (searchInputValue.length > 0) {
-      setSearchProducts(tempProducts);
-
-      if (tempProducts.length === 0) {
-        setErrorSearchInput("Nie ma takiego produktu");
-      }
-    }
-
-    e.target.reset();
-  };
-
   const resetSearchInputProducts = () => {
-    setSearchProducts([]);
+    setProducts([...initalProductsState]);
+    setSearchProductByName("");
+    setFreeDelivery(false);
+    setCategoryFilter("all");
+    getMaxProductPrice();
   };
   const clearErrorAlerts = () => {
     setErrorSearchInput("");
@@ -149,8 +284,10 @@ const Root = () => {
   useEffect(
     () => {
       calculateTotals();
+      localStorage.setItem("itemsInCart", JSON.stringify(shoppingCart));
+      localStorage.setItem("cartCounter", JSON.stringify(cartCounter));
     },
-    [shoppingCart],
+    [shoppingCart, cartCounter],
     addProductQuantity
   );
 
@@ -170,13 +307,29 @@ const Root = () => {
           addProductQuantityAndPrice,
           cartTotal,
           filteredProducts,
-          searchProductFn,
-          searchProducts,
           resetSearchInputProducts,
           errorSearchInput,
           clearErrorAlerts,
           addProductQuantity,
           deleteProductQuantity,
+          filterPrice,
+          handleFilterPriceChange,
+          maxProductPrice,
+          handleFreeDelivery,
+          freeDelivery,
+          clearAndCloseCart,
+          handleAlertClose,
+          alertOpen,
+          alertContent,
+          initalProductsState,
+          handleCategoryFilterChange,
+          categoryFilter,
+          handleSearchProductByNameChange,
+          searchProductByName,
+          showAndCloseAlertAfterTimeWithContent,
+          widthPage,
+          toggleBurgerMenu,
+          showBurgerMenu,
         }}
       >
         <MainTemplate>

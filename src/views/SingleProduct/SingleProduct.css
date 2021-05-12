@@ -1,13 +1,14 @@
 .singleProduct_mainWrapper {
   position: relative;
+  height: 100vh;
+  display: flex;
 }
 .singleProduct_wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr;
   width: 80%;
-  height: 80vh;
+  height: 80%;
   margin: auto;
-  padding: 100px 0 0 0;
 }
 .singleProduct_imageWrapper {
   display: flex;
@@ -15,32 +16,33 @@
   align-items: center;
 }
 .singleProduct_image {
-  height: 350px;
-  width: 350px;
+  max-height: 350px;
+  max-width: 350px;
   transition: all 0.4s ease-in-out;
 }
 .singleProduct_image:hover {
-  transform: scale(1.6);
+  transform: scale(1.4);
 }
 .singleProduct_infoWrapper {
-  padding: 0px 0px 0px 50px;
+  padding-left: 50px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 .singleProduct_name {
-  height: 20%;
+  min-height: 100px;
   display: flex;
   align-items: center;
   font-size: 36px;
 }
 .singleProduct_price {
   display: flex;
-  height: 10%;
+  min-height: 50px;
   font-size: 32px;
 }
 .singleProduct_desc {
   display: flex;
-  height: 40%;
+  min-height: 200px;
   align-items: center;
   font-size: 18px;
 }
@@ -48,16 +50,18 @@
   height: 10%;
 }
 .singleProduct_weight {
-  border: 1px rgb(218, 41, 28);
+  border: 1px #00d563;
   width: 50px;
   height: 40px;
-  background-color: rgb(218, 41, 28);
+  background-color: #00d563;
   color: white;
+  margin-top: 20px;
 }
 .singleProduct_addToCartWrapper {
   display: flex;
   height: 100px;
   align-items: center;
+  justify-content: center;
 }
 .singleProduct_quantityButton {
   padding: 12px 24px;
@@ -69,7 +73,7 @@
   padding: 12px 24px;
 }
 .singleProduct_addToCartButton {
-  background-color: rgb(218, 41, 28);
+  background-color: #00d563;
   width: 300px;
   padding: 12px;
   margin: 0px 0px 0px 20px;
@@ -77,4 +81,20 @@
   font-size: 14px;
   font-weight: bold;
   cursor: pointer;
+  border: 1px #00d563;
+}
+
+@media screen and (max-width: 980px) {
+  .singleProduct_wrapper {
+    grid-template-columns: 1fr;
+  }
+  .singleProduct_infoWrapper {
+    padding-left: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center
+  }
+  .singleProduct_image:hover {
+    transform: scale(1.1);
+  }
 }

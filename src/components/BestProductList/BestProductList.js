@@ -4,6 +4,7 @@ import { routes } from "../../routes/index";
 import "./BestProductList.css";
 import BestProductListItem from "../BestProductListItem/BestProductListItem";
 import AppContext from "../../context/context";
+import Flip from "react-reveal/Flip";
 
 const BestProductList = () => {
   const context = useContext(AppContext);
@@ -11,14 +12,17 @@ const BestProductList = () => {
 
   return (
     <div className="bestProductList_wrapper">
-      <h2 className="bestProductList_title"> Bestsellery </h2>
+      <h2 className="bestProductList_title">
+        {" "}
+        <Flip cascade> Bestsellery </Flip>{" "}
+      </h2>
       <ul className="bestProductList">
         {products.slice(2, 6).map((item) => {
           return (
             <li key={item.productName}>
               <BestProductListItem
                 name={item.productName}
-                img={item.productImage}
+                image={item.productImage}
                 price={item.productPrice}
                 weight={item.productWeight}
                 quantity={item.productQuantity}

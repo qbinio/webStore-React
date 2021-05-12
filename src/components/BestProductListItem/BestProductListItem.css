@@ -23,7 +23,6 @@
 }
 .bestProductListItem_headerNameWrapper {
   color: black;
-  margin: 25px 0 20px 0;
   cursor: pointer;
 }
 .bestProductListItem_desc {
@@ -37,12 +36,13 @@
 }
 
 .bestProductListItem_addToCartButton {
-  border: 3px solid red;
+  border: 3px solid #00d563;
   padding: 5px 15px 5px 15px;
   color: white;
-  background-color: red;
+  background-color: #00d563;
   font-weight: bold;
   font-size: 12px;
   border-radius: 14px;
   cursor: pointer;
+  margin: 10px 0px;
 }

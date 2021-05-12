@@ -1,12 +1,25 @@
 .sliderWrapper {
-  width: 80%;
-  height: 80%;
+  width: 100%;
+  height: auto;
 }
 .slider_imageWrapper {
-  height: 100%;
+  height: auto;
   width: 100%;
 }
 .slider_image {
-  height: 100%;
+  height: auto;
   width: 100%;
+}
+.awssld__bullets--active {
+  background: #00d563 !important;
+}
+.awssld__content, .awssld__box {
+  height: unset !important;
+}
+.awssld {
+  height: unset !important;
+}
+
+.awssld__container {
+  padding-bottom: calc(var(--slider-height-percentage))
 }

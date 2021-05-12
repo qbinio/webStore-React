@@ -1,6 +1,7 @@
 .productListItemWrapper {
   display: flex;
   flex-direction: column;
+  margin: 20px 0px;
 }
 .productImageBox {
   margin: auto;
@@ -21,7 +22,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 300px;
+  height: 200px;
 }
 .productListItemDesc {
   padding: 0px 20px 0px 20px;
@@ -39,10 +40,10 @@
   cursor: pointer;
 }
 .productAddToCartButton {
-  border: 3px solid red;
+  border: 3px solid #00d563;
   padding: 5px 15px 5px 15px;
   color: white;
-  background-color: red;
+  background-color: #00d563;
   font-weight: bold;
   font-size: 12px;
   border-radius: 14px;

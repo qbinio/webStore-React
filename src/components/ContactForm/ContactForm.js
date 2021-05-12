@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import AppContext from "../../context/context";
 import "./ContactForm.css";
 
 const ContactForm = () => {
   const [emailErrorAlert, setEmailErrorAlert] = useState("");
   const [successAlert, setSuccessAlert] = useState("");
   const [phoneNumberErrorAlert, setPhoneNumberErrorAlert] = useState("");
+
+  const context = useContext(AppContext);
+  const { showAndCloseAlertAfterTimeWithContent } = context;
 
   const onValidate = (e) => {
     e.preventDefault();
@@ -22,7 +26,7 @@ const ContactForm = () => {
     if (phoneNumberInputValue.substring(0, 3) !== "+48")
       setPhoneNumberErrorAlert("Wprowadź numer kierunkowy +48");
     else {
-      setSuccessAlert("Wysłano");
+      showAndCloseAlertAfterTimeWithContent(5000, "Message successfully sent");
       setPhoneNumberErrorAlert("");
     }
   };

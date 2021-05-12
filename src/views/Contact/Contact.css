@@ -1,0 +1,18 @@
+.contactContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.contactWrapper {
+    display: flex;
+}
+.contactWrapper img {
+    margin-left: 100px;
+    width: 40%;
+}
+
+@media screen and (max-width: 900px) {
+    .contactWrapper img {
+        display: none;
+    }
+}

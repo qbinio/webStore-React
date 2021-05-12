@@ -9,7 +9,7 @@
 }
 .bestProductList {
   display: grid;
-  grid-template-columns: repeat(4, 300px);
+  grid-template-columns: repeat(4, 1fr);
   width: 80%;
   margin: 0 auto;
   list-style: none;
@@ -25,9 +25,9 @@
   text-decoration: none;
   font-size: 24px;
   color: white;
-  background-color: red;
+  background-color: #00d563;
   padding: 5px 15px;
-  border: 3px solid red;
+  border: 3px solid #00d563;
   border-radius: 50px;
   font-weight: bold;
 }

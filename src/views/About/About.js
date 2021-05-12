@@ -24,12 +24,20 @@ const About = () => (
           </p>
         </div>
         <div className="trzy">
-          <img className="zdj" src={firstSectionImage} alt="photo product" />
+          <img
+            className="about_img first"
+            src={firstSectionImage}
+            alt="photo product"
+          />
         </div>
       </div>
       <div className="about_firstSectionHalf">
         <div className="dwa">
-          <img className="zdj" src={firstImage} alt="photo product" />
+          <img
+            className="about_img second"
+            src={firstImage}
+            alt="photo product"
+          />
         </div>
         <div className="about_firstSectionText">
           <h1 className="about_firstSectionTitle"> GROOMING TOOLS </h1>

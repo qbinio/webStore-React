@@ -1,0 +1,40 @@
+.filterMenu {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  margin-left: 8%;
+}
+.filterMenu > div{
+    margin: 25px 0px;
+}
+.filterMenuWrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+@media screen and (max-width: 1100px) {
+   .filterMenu {
+     position: static;
+     flex-direction: row;
+     margin-left: 0;
+     justify-content: space-around;
+     align-items: center;
+   }
+   .filterMenu > div {
+     margin: 10px 0px;
+   }
+}
+
+@media screen and (max-width: 780px) {
+    .filterMenu {
+        flex-direction: column;
+    }
+    .filterMenuWrapper {
+       display: flex;
+       justify-content: space-around;
+       align-items: center;
+       width: 100%;
+       order: 2;
+       flex-wrap: wrap;
+    }
+}

@@ -5,6 +5,7 @@ import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import AppContext from "../../context/context";
 import "./ShoppingCart.css";
+import PayPalButton from "../PayPalButton/PayPalButton";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -58,11 +59,17 @@ const ShoppingCart = () => {
               <h2 style={{ textAlign: "center" }}>Your Shopping Cart</h2>
               <h2 className="shoppingCart_total">Total: {cartTotal}$</h2>
             </div>
-            <div className="shoppingCart_titlesWrapper">
-              <p className="shoppingCart_titleName">Product</p>
-              <p>Quantity</p>
-              <p>Price</p>
-            </div>
+            {shoppingCart.length > 0 ? (
+              <div className="shoppingCart_titlesWrapper">
+                <p className="shoppingCart_titleName">Product</p>
+                <p>Quantity</p>
+                <p>Price</p>
+              </div>
+            ) : (
+              <p className="shoppingCart_emptyMessage">
+                Your cart is currently empty
+              </p>
+            )}
             <ul>
               {shoppingCart.map((item) => {
                 return (
@@ -113,6 +120,7 @@ const ShoppingCart = () => {
                 );
               })}
             </ul>
+            {shoppingCart.length > 0 ? <PayPalButton /> : null}
           </div>
         </Fade>
       </Modal>
